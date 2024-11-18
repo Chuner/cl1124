@@ -1,0 +1,24 @@
+<section class="listing" *ngIf="rentalAgreement">
+  <h2 class="listing-heading">{{ rentalAgreement.toolCode }} ({{ rentalAgreement.toolType }} {{ rentalAgreement.toolBrand }}) </h2>
+  <p class="listing-location">
+    <strong>Checkout Date</strong>: {{ rentalAgreement.checkoutDate | date: 'MM/dd/yy' }}
+  </p>
+  <p class="listing-location">
+    <strong>Return Date</strong>: {{ rentalAgreement.returnDate | date: 'MM/dd/yy' }}
+  </p>
+  <p class="listing-location">
+    <strong>Daily Rental Charge</strong>: {{ rentalAgreement.dailyCharge | currency }}
+  </p>
+  <p class="listing-location">
+    <strong>Chargeable Days:</strong>: {{ rentalAgreement.chargeableDays }}
+  </p>
+  <p class="listing-location">
+    <strong>Pre-discount Amount:</strong>: {{ rentalAgreement.prediscountAmount | currency }}
+  </p>
+  <p class="listing-location">
+    <strong>Discount Percent:</strong>: {{ rentalAgreement.discountPercent | percent }}
+  </p>
+  <p class="listing-location">
+    <strong>Final Amount:</strong>: {{ rentalAgreement.finalAmount | currency}}
+  </p>
+</section>

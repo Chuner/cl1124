@@ -1,0 +1,9 @@
+<section>
+  <a [routerLink]="'/new'">Add New Tool Rental</a>  
+</section>
+
+<section class="results">
+  <app-rental-agreement *ngFor="let rental of rentalList" 
+    [rentalAgreement]="rental"></app-rental-agreement>
+</section>
+
