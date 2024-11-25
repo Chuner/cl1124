@@ -8,9 +8,10 @@ import moment from 'moment-timezone';
 export class UtilityService {
 
   private adjustTimeZone(date: Date) {
-    const diff = date.getTimezoneOffset()
-    date.setHours(date.getHours() + diff/60);
-    return date;
+    const useDate = new Date(date);
+    const diff = useDate.getTimezoneOffset()
+    useDate.setHours(useDate.getHours() + diff/60);
+    return useDate;
   }
 
   isLaborDay(date: Date): boolean {

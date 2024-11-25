@@ -75,7 +75,7 @@ export class NewRentalComponent {
       tool: new FormControl('', [Validators.required]),
       checkoutDate: new FormControl('', [Validators.required]),
       returnDate: new FormControl('', [Validators.required]),
-      discountPercent: new FormControl('', [Validators.pattern('^[1-9][0-9]?$')]),
+      discountPercent: new FormControl('', [Validators.pattern('^[1-9]?[0-9]$')]),
     });
 
     this.newRental = {
@@ -128,12 +128,13 @@ export class NewRentalComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      /*
       const errors = this.validateForm();
       if (errors.length) {
         alert(errors.join(' '));
         return;
       }
-
+      */
       this.getNewRentalAgreement();
       this.openConfirmDialog();
     }
@@ -161,14 +162,13 @@ export class NewRentalComponent {
   }
 
   private isChargeableDay(charge: ToolCharge | undefined, date: Date) {
-    const isWeekend = this.utilService.isWeekend(date); 
-    const isWeekday = !isWeekend;
     const isHoliday = this.utilService.isHoliday(date); 
-    const isChargeableDay = (isHoliday && charge?.holidayCharge) || 
-      (isWeekend && charge?.weekendCharge) || 
-      (isWeekday && charge?.weekdayCharge);
+    if (isHoliday) return charge?.holidayCharge;
 
-    return isChargeableDay;
+    const isWeekend = this.utilService.isWeekend(date); 
+    if (isWeekend) return charge?.weekendCharge;
+
+    return charge?.weekdayCharge;
   }
 
   //  Calculated using checkout date and return date, excluding “no charge” days as specified by the tool type

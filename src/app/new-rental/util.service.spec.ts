@@ -26,4 +26,20 @@ describe('UtilityService', () => {
     expect(service.isLaborDay(new Date('2023-09-04'))).toBe(true); // Labor Day, 2023
     expect(service.isLaborDay(new Date('2024-09-01'))).toBe(false); // Not Labor Day
   });
+
+  // 9/3/15 Thu 9/4 Fri week day   2
+  // 9/5 9/6 weekend 0
+  // 9/7 Labor day 0
+  // 9/8 9/9 weekday  2
+  // 4 charge days with no discount = 4 x 2.99 = 11.96
+  // FAILED - 3 chargeable days?
+  it("Test #4", () => {
+    expect(!service.isWeekend(new Date('9/3/15'))).toBe(true); 
+    expect(!service.isWeekend(new Date('9/4/15'))).toBe(true); 
+    expect(service.isWeekend(new Date('9/5/15'))).toBe(true); 
+    expect(service.isWeekend(new Date('9/6/15'))).toBe(true); 
+    expect(service.isLaborDay(new Date('9/7/15'))).toBe(true);
+    expect(!service.isWeekend(new Date('9/8/15'))).toBe(true); 
+    expect(!service.isWeekend(new Date('9/9/15'))).toBe(true);  
+  });
 });
